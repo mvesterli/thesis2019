@@ -1,0 +1,6 @@
+FROM ann-benchmarks
+
+RUN apt-get install -y libboost-system-dev libboost-timer-dev libboost-chrono-dev
+RUN git clone https://github.com/mvesterli/efanna.git
+RUN cd efanna && make annbenchmark_wrapper
+

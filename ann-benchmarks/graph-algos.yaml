@@ -1,0 +1,118 @@
+float:
+  any:
+    pynndescent:
+      docker-tag: ann-benchmarks-pynndescent
+      module: ann_benchmarks.algorithms.graph.pynndescent
+      constructor: PyNNDescent
+      base-args: ["@metric"]
+      run-groups:
+        pynndescent:
+          args: [[1, 5, 10, 15, 20, 25]]
+    kgraph:
+      docker-tag: ann-benchmarks-kgraph2
+      module: ann_benchmarks.algorithms.graph.kgraph
+      constructor: KGraph
+      base-args: ["@metric"]
+      run-groups:
+        kgraph:
+          args: { "L": [0, 10, 20, 30, 50, 100], "recall": [0.2, 0.5, 0.7, 0.8, 0.9, 0.95, 0.99] }
+    efanna:
+      docker-tag: ann-benchmarks-efanna
+      module: ann_benchmarks.algorithms.graph.subprocess
+      constructor: FloatSubprocess
+      base-args: [["efanna/annbenchmark_wrapper"]]
+      run-groups:
+        efanna:
+          args: { "metric": ["@metric"], "num_trees": [160, 320], "merge_level": [8, 12], "iterations": [0], "L": [0], "check": [30], "S": [10] }
+    rknng:
+      docker-tag: ann-benchmarks-rknng
+      module: ann_benchmarks.algorithms.graph.subprocess
+      constructor: FloatSubprocess
+      base-args: [["rknng/annbenchmark_wrapper"]]
+      run-groups:
+        rknng:
+          args: { "metric": ["@metric"], "window_width": [10, 20, 30], "max_iterations": [160, 320] }
+    plain-lsh:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        plain-lsh:
+          args: { "method": ["plain"], "use_sketching": [false], "recall": [0.3, 0.6, 0.8, 0.9], "hash_length": [14, 16, 18, 20] }
+    plain-lsh-sketched:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        plain-lsh-sketched:
+          args: { "method": ["plain"], "use_sketching": [true], "recall": [0.3, 0.6, 0.8, 0.9], "hash_length": [16, 18, 20] }
+    projection-lsh:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        projection-lsh:
+          args: { "method": ["projection"], "use_sketching": [false], "hash_length": [12, 14, 16, 18, 20], "repetitions": [100, 200, 400, 800], "block_size": [8, 16] }
+    projection-lsh-sketched:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        projection-lsh-sketched:
+          args: { "method": ["projection"], "use_sketching": [true], "hash_length": [12, 14, 16, 18, 20], "repetitions": [100, 200, 400, 800], "block_size": [8, 16] }
+    fixed-buckets-lsh:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        fixed-bucket-lsh:
+          args: { "method": ["fixed_buckets"], "use_sketching": [false], "repetitions": [50, 100, 200, 400, 800], "bucket_size": [8, 16], "hash_length": [12, 14, 16, 18, 20] }
+    fixed-buckets-lsh-sketched:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        fixed-bucket-lsh:
+          args: { "method": ["fixed_buckets"], "use_sketching": [true], "repetitions": [50, 100, 200, 400, 800], "bucket_size": [8, 16], "hash_length": [12, 14, 16, 18, 20] }
+    bounded-buckets-lsh-sketched:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        bounded-buckets-lsh:
+          args: { "method": ["bounded_buckets"], "use_sketching": [true], "repetitions": [40, 80, 160, 320], "hash_length": [24], "bucket_size": [10, 20, 40] }
+    varying-repetitions-lsh-sketched:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        varying-repetitions-lsh:
+          args: { "method": ["varying_repetitions"], "use_sketching": [true], "recall": [0.4, 0.8, 0.9, 0.95], "keep_points": [true], "guaranteed_fraction": [0.9], "update_treshold": [50], "initial_hash_length": [24] }
+    puffinn-nndescent:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        puffinn-nndescent:
+          args: { "method": ["nndescent"], "use_sketching": [false], "repetitions": [10, 20, 50, 100, 200], "sample_rate": [1.0] }
+    puffinn-nndescent-sketched:
+      docker-tag: none
+      module: ann_benchmarks.algorithms.graph.puffinn
+      constructor: Puffinn
+      base-args: ["@metric"]
+      run-groups:
+        puffinn-nndescent:
+          args: { "method": ["nndescent"], "use_sketching": [true], "repetitions": [10, 20, 50, 100, 200], "sample_rate": [1.0] }
+  angular: {}
+  euclidean: {}
+
+   
